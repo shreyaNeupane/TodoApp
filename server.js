@@ -1,9 +1,15 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const cors = require('cors')
+const cors = require('cors');
+const connectDB = require('./config/db');
+
+//env config
 dotenv.config();
 //rest object
 const app = express();
+
+//DB connection
+connectDB();
 
 //middlewares => allows your server to understand JSON data.
 app.use(express.json());
