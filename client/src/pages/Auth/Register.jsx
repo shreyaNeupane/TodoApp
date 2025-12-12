@@ -1,20 +1,27 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./AuthStyle.css";
+import AuthServices from "../../Services/AuthServices";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+ const navigate = useNavigate()
   //login function
-  const registerHandler = (e) => {
+  const registerHandler = async (e) => {
+    try{
     e.preventDefault();
-    try {
-      alert("Login Data " + email + " " + password + username);
-    } catch (error) {
-      console.log(error);
-    }
+    const data = {username,email,password};
+    const res = await AuthServices.registerUser(data);
+    toast.success(res.data.message)
+    navigate('/login');
+    console.log(res.data);
+  }catch(error){
+    toast.error("something went wrong")
+    console.log(error)
+  }
   };
   return (
     <div className="form-container">
@@ -55,7 +62,7 @@ const Register = () => {
             Already Have an account? Please <Link to="/login">Login</Link>
           </p>
           <button type="submit" className="login-btn" onClick={registerHandler}>
-            LOGIN
+            REGISTER
           </button>
         </div>
       </div>
