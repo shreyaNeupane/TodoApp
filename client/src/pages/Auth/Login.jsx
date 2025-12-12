@@ -3,6 +3,7 @@ import { Link , Navigate, useNavigate } from "react-router-dom";
 import "./AuthStyle.css";
 import AuthServices from "../../Services/AuthServices";
  import toast from 'react-hot-toast';
+import { getErrorMessage } from "../../Utils/ErrorMessage";
 
 const Login = () => {
   const [email,setEmail] = useState('')
@@ -19,9 +20,9 @@ const navigate = useNavigate()
     // to keep user logged in even after refreshing the page
     localStorage.setItem("todoapp",JSON.stringify(res.data));
     console.log(res.data);
-  }catch(error){
-    toast.error("something went wrong")
-    console.log(error)
+  }catch(err){
+    toast.error(getErrorMessage(err))
+    console.log(err)
   }
    
   }

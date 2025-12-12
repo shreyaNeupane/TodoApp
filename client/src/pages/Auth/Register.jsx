@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./AuthStyle.css";
 import AuthServices from "../../Services/AuthServices";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "../../Utils/ErrorMessage";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -18,9 +19,10 @@ const Register = () => {
     toast.success(res.data.message)
     navigate('/login');
     console.log(res.data);
-  }catch(error){
-    toast.error("something went wrong")
-    console.log(error)
+  }catch(err){
+    //err so that it wont crash with (error) from getErrorMessage
+    toast.error(getErrorMessage(err))
+    console.log(err)
   }
   };
   return (
