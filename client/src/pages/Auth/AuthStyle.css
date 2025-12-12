@@ -1,0 +1,32 @@
+.form-container{
+    display : flex;
+    align-items :center;
+    justify-content :center;
+    height: 100vh;
+}
+
+.form{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0px 3px 1px gray;
+}
+.welcome{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+   color: rgb(103, 192, 247) ;
+}
+
+.login-btn{
+    background-color: rgb(103, 192, 247) ;
+    width: 100%;
+    border: none;
+    height: 50px;
+    border-radius: 5px;
+    color: whitesmoke;
+}
+.login-btn:hover{
+    background-color: rgb(103, 192, 220)
+}
