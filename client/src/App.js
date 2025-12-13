@@ -6,6 +6,7 @@ import Register from "./pages/Auth/Register";
 import Todolist from "./pages/Todos/Todolist";
 import  { Toaster } from "react-hot-toast";
 import HomePage from './pages/Home/HomePage';
+import Navbar from "./component/Layout/Navbar";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/todolist" element={<Todolist />} />
+        <Route path="/navbar" element={<Navbar/>}/>
       </Routes>
       <Toaster />
     </>

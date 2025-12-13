@@ -18,6 +18,7 @@ const navigate = useNavigate()
     toast.success(res.data.message)
     navigate('/home');
     // to keep user logged in even after refreshing the page
+    //json.stringify -> coverting object to string (while sving) cause localstorage only understands strings , objects cannot be stored directly
     localStorage.setItem("todoapp",JSON.stringify(res.data));
     console.log(res.data);
   }catch(err){
