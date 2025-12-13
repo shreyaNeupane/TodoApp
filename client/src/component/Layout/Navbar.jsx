@@ -20,10 +20,13 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light flex">
         <div className="container-fluid">
-          <i className="fa-solid fa-circle-user"></i>&nbsp;
-          <span>Welcome {username}!</span>
+          <div class="navbar-brand">
+            <i className="fa-solid fa-circle-user"></i>&nbsp;
+            <span>Welcome {username}!</span>
+          </div>
+          
           <button
             className="navbar-toggler"
             type="button"
@@ -52,12 +55,15 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <button className="nav-link" to="/login" onClick={logoutHandler}>
+                <button
+                  className="nav-link"
+                  to="/login"
+                  onClick={logoutHandler}
+                >
                   LogOut &nbsp;
                   <i className="fa-solid fa-arrow-right-from-bracket" />
                 </button>{" "}
               </li>
-              
             </ul>
           </div>
         </div>
