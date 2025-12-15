@@ -64,7 +64,8 @@ const loginController = async (req, res) => {
         message: "Invalid email or password",
       });
     }
-    //token => Backend stores the user’s _id so that every request made by the token uniquely identifies the user.
+    //creates a signed token containing the user’s ID as payload, secured with a secret key to prevent tampering
+    //token => header(jwt libraray creates it) +payload(data you want to store inside jwt token) + signature
     const token = await JWT.sign({ id: user._id }, process.env.JWT_SECERT, {
       expiresIn: "1d",
     });
