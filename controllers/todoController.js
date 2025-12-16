@@ -11,7 +11,7 @@ const createTodoController = async (req, res) => {
       });
     }
     // // Backend creates a Todo document in server memory (temporary, not saved yet)
-    const todo = new todoModel({ title, description, createdBy:req.userId });
+    const todo = new todoModel({ title, description, createdBy: req.userId });
     //saving data in database
     await todo.save();
     res.status(201).send({
@@ -27,9 +27,9 @@ const createTodoController = async (req, res) => {
       error,
     });
   }
-}
+};
 
-
+// get todos
 const getTodoController = async (req, res) => {
   try {
     //get user id
@@ -66,6 +66,72 @@ const getTodoController = async (req, res) => {
   }
 };
 
+//delete todo
+const deletetodoController = async (req, res) => {
+  try {
+    //check if id exists in url
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).send({
+        message: "please provide todo id",
+      });
+    }
+    //find id in database and delete
+    const todo = await todoModel.findByIdAndDelete(id);
+    if (!todo) {
+      return res.status(404).send({
+        success: false,
+        message: "No task found",
+      });
+    }
+    res.status(200).send({
+      success: true,
+      message: "Your task has been deleted",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+    });
+  }
+};
 
-
-module.exports = { createTodoController, getTodoController };
+// update todo
+const updatetodoController = async (req, res) => {
+  try {
+    const {id} = req.params;
+    if (!id) {
+      return res.status(400).send({
+        message: "please provide todo id",
+      });
+    }
+    const data = req.body;
+    //update
+    const todo = await todoModel.findByIdAndUpdate(
+      id,
+      //mongodb operator = >Only updates the fields I provide, leave the rest untouched.”
+      { $set: data },
+      //returns update document 
+      { returnOriginal: false }
+    );
+    res.status(200).send({
+      sucess: true,
+      message: "your task has been updated",
+      todo,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      sucess: false,
+      error,
+      message: "Error In update Todo",
+    });
+  }
+};
+module.exports = {
+  createTodoController,
+  getTodoController,
+  deletetodoController,
+  updatetodoController,
+};
