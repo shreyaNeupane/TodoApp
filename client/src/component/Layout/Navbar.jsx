@@ -14,7 +14,7 @@ const Navbar = () => {
   useEffect(() => {
     //json.parse -> string to object (when reading) as it has been stringify while saving
     const userData = JSON.parse(localStorage.getItem("todoapp"));
-    console.log("userdata" + userData && userData.user.username);
+    // console.log("userdata" + userData && userData.user.username);
     setUsername(userData && userData.user.username);
   }, []);
 
@@ -22,7 +22,7 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light flex">
         <div className="container-fluid">
-          <div class="navbar-brand">
+          <div className="navbar-brand">
             <i className="fa-solid fa-circle-user"></i>&nbsp;
             <span>Welcome {username}!</span>
           </div>
