@@ -10,3 +10,24 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 
 } 
+/* ----------CARD ------------ */
+.chead{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+}
+.chead .task-inc{
+    background-color: rgb(253, 114, 137) ;
+    padding: 5px 10px;
+    font-family: cursive;
+    border-radius: 5px;
+}
+.chead .task-cmp{
+    background-color: rgb(153, 248, 153);
+     padding: 5px 10px;
+    font-family: cursive;
+    border-radius: 5px;
+}
+.card-footer button{
+    margin-right :1rem ;
+}
