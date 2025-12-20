@@ -17,5 +17,9 @@ const getAllTodo = (id) => {
   //sends frontend data to backend
   return axios.get(`/todo/getAll/${id}`);
 };
-const TodoServices = {createTodo ,getAllTodo}
+const updateTodo = (id,data) => {
+  //sends frontend data to backend
+  return axios.patch("/todo/update/" + id , data);
+};
+const TodoServices = {createTodo ,getAllTodo ,updateTodo}
 export default TodoServices
