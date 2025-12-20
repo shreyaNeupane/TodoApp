@@ -9,6 +9,7 @@ const PopUpModal = ({
   setDescription,
   showModal,
   setShowModal,
+  getUserTask,
 }) => {
   //handleclose
   const handleClose = () => {
@@ -29,6 +30,7 @@ const PopUpModal = ({
       console.log(todo);
       setShowModal(false);
       toast.success("Task created sucessfully");
+      getUserTask()
       setTitle("");
       setDescription("");
     } catch (error) {

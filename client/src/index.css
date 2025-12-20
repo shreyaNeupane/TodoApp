@@ -31,3 +31,12 @@
 .card-footer button{
     margin-right :1rem ;
 }
+.card-container{
+    display:flex;
+    flex-direction: row;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+.card{
+    margin-left: 1rem;
+}

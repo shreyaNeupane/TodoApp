@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import TodoServices from "../Services/TodoServices";
 
-const EditTodo = ({ task, setShowModal }) => {
+const EditTodo = ({ task, setShowModal ,getUserTask }) => {
   const [title, setTitle] = useState(task?.title);
   const [description, setDescription] = useState(task?.description);
-  const [iscompleted, setIsCompleted] = useState(task?.iscompleted);
+  const [isCompleted, setIsCompleted] = useState(task?.isCompleted);
   const handleClose = () => {
     setShowModal(false);
   };
   const handleSelectChange = (e) => {
-    setIsCompleted(e.target.value);
+    setIsCompleted(e.target.value === "true");
     // console.log(e.target.value)
   };
   //update
@@ -19,7 +19,7 @@ const EditTodo = ({ task, setShowModal }) => {
     try {
       const userData = JSON.parse(localStorage.getItem("todoapp"));
       const createdBy = userData && userData.user.id;
-      const data = { title, description, createdBy, iscompleted };
+      const data = { title, description, createdBy, isCompleted };
 
       if (!title || !description) {
         return toast.error("please provide title or description");
@@ -31,6 +31,7 @@ const EditTodo = ({ task, setShowModal }) => {
       toast.success("Task updated sucessfully");
       setTitle("");
       setDescription("");
+      getUserTask()
     } catch (error) {
       console.log(error);
       toast.error(error);
@@ -79,10 +80,14 @@ const EditTodo = ({ task, setShowModal }) => {
                   <label htmlFor="floatingTextarea">Description</label>
                 </div>
                 <div className="my-3">
-                  <select className="form-select" onChange={handleSelectChange}>
-                    <option selected>Select Status</option>
-                    <option value={true}>Completed</option>
-                    <option value={false}>Incomplete</option>
+                  <select
+                    className="form-select"
+                    value={String(isCompleted)}
+                    onChange={handleSelectChange}
+                  >
+                    <option value="">Select Status</option>
+                    <option value="true">Completed</option>
+                    <option value="false">Incomplete</option>
                   </select>
                 </div>
               </div>
