@@ -7,6 +7,8 @@ import Spinner from "../../component/Spinner";
 
 const HomePage = () => {
   const [showModal, setShowModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredTask, setFilteredTask] = useState([]);
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -31,12 +33,33 @@ const HomePage = () => {
   useEffect(() => {
     getUserTask();
   }, []);
+  const handleSearch = (e) => {
+    const query = e.target.value; //user input
+    setSearchQuery(query); //controls input box
+
+    if (!query) {
+      setFilteredTask([]); //reset search result
+      return;
+    }
+
+    const searchList = allTask.filter((item) =>
+      item.title.toLowerCase().includes(query.toLowerCase())
+    );
+
+    setFilteredTask(searchList);
+  };
+
   return (
     <>
       <Navbar />
       <div className="add-task">
         <h1>Your task</h1>
-        <input type="search" placeholder="search your task" />
+        <input
+          type="search"
+          placeholder="search your task"
+          value={searchQuery}
+          onChange={handleSearch}
+        />
         <button className="btn btn-primary" onClick={openModalHandler}>
           Create task <i className="fa-solid fa-plus" />
         </button>
@@ -44,7 +67,12 @@ const HomePage = () => {
       {loading ? (
         <Spinner />
       ) : (
-        allTask && <Card allTask={allTask} getUserTask={getUserTask} />
+        allTask && (
+          <Card
+            allTask={searchQuery ? filteredTask : allTask}
+            getUserTask={getUserTask}
+          />
+        )
       )}
       {/* --------- modal ------------ */}
       <PopUpModal
